@@ -44,18 +44,19 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: FutureBuilder<PostsList>(
-            future: data,
-            builder: (context, AsyncSnapshot<PostsList> snapshots) {
-              if (snapshots.hasData)
-                return SingleChildScrollView(
-                  child: Center()
+      body: FutureBuilder<PostsList>(
+        future: data,
+        builder: (context, AsyncSnapshot<PostsList> snapshots) {
+          if (snapshots.hasData)
+            return SingleChildScrollView(
+              child: Center()
+            );
+          else {
+            return Center(
+                // child: CircularProgressIndicator(),
                 );
-              else {
-                return Center(
-                    // child: CircularProgressIndicator(),
-                    );
-              }
-            }));
+          }
+        })
+    );
   }
 }

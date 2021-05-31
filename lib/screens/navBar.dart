@@ -1,5 +1,7 @@
 import 'package:covid19_update/main.dart';
 import 'package:covid19_update/models/function.dart';
+import 'package:covid19_update/screens/all_country.dart';
+import 'package:covid19_update/screens/developer_page.dart';
 import 'package:covid19_update/screens/statistic_page.dart';
 import 'package:flutter/material.dart';
 
@@ -13,16 +15,14 @@ class NavBar extends StatefulWidget {
 class _NavBarState extends State<NavBar> {
   int currentIndex = 0;
 
-  List pages=[
-    HomeScreen(),
-    MyStatPage()
-  ];
+  List pages = [HomeScreen(), MyStatPage(), AllCountry(), Developer()];
 
-  ontap(int selectedItem){
+  ontap(int selectedItem) {
     setState(() {
-          currentIndex = selectedItem;
-        });
+      currentIndex = selectedItem;
+    });
   }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -37,20 +37,25 @@ class _NavBarState extends State<NavBar> {
           elevation: 0.00,
           items: [
             BottomNavigationBarItem(
-              activeIcon: myactiveIcon(Icons.home),
+                activeIcon: myactiveIcon(Icons.home),
+                label: "",
+                icon: Icon(Icons.home)),
+            BottomNavigationBarItem(
               label: "",
-              icon: Icon(Icons.home)
+              icon: Icon(Icons.bar_chart),
+              activeIcon: myactiveIcon(Icons.bar_chart)
             ),
-             BottomNavigationBarItem(
-               label: "",
-               icon: Icon(Icons.home)),
-               BottomNavigationBarItem(label: "", icon: Icon(Icons.home)),
-               BottomNavigationBarItem(label: "", icon: Icon(Icons.home))
+            BottomNavigationBarItem(
+                label: "",
+                icon: Icon(Icons.library_books_sharp),
+                activeIcon: myactiveIcon(Icons.library_books_sharp)),
+            BottomNavigationBarItem(
+                label: "",
+                icon: Icon(Icons.person),
+                activeIcon: myactiveIcon(Icons.person))
           ],
         ),
-        
       ),
     );
   }
 }
-

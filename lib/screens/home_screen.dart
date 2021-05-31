@@ -43,7 +43,10 @@ class _HomeScreenState extends State<HomeScreen> {
               myfavRow(context,
                   firstWidget: Text(
                     'Covid-19',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white, 
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30
+                    ),
                   ),
                   // secondWidget: Text('Ghana', style: TextStyle(color: Colors.white),),
                   secondWidget: Container(
@@ -67,8 +70,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 contentPadding: EdgeInsets.zero,
                 title: Text(
                   'Are you feeling sick?',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white, 
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20
+                  ),
                 ),
+                
                 subtitle: Text(
                   'If you feel sick with any of covid symptoms\n please CALL or SMS us immediately for help.',
                   style: TextStyle(color: Colors.white),
@@ -105,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: ListView(
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Prevention'),
+                Text('Prevention', style: TextStyle(fontWeight: FontWeight.bold),),
                 Container(
                   padding: EdgeInsets.only(top: 10),
                   width: double.infinity,
