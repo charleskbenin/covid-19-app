@@ -2,6 +2,9 @@ import 'package:covid19_update/models/function.dart';
 import 'package:covid19_update/models/posts_model.dart';
 import 'package:covid19_update/network/get_network.dart';
 import 'package:flutter/material.dart';
+import 'package:fl_chart/fl_chart.dart';
+
+import 'bar_chart.dart';
 
 class MyStatPage extends StatefulWidget {
   @override
@@ -10,6 +13,7 @@ class MyStatPage extends StatefulWidget {
 
 class _MyStatPageState extends State<MyStatPage> {
   Future data;
+
 
   @override
   void initState() {
@@ -35,7 +39,7 @@ class _MyStatPageState extends State<MyStatPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(
-                height: 40,
+                height: MediaQuery.of(context).size.height * 0.020,
               ),
               myfavRow(
                 context,
@@ -57,7 +61,7 @@ class _MyStatPageState extends State<MyStatPage> {
                             color: Colors.white, fontWeight: FontWeight.bold),
                       )),
                   SizedBox(
-                    height: 40,
+                    height: MediaQuery.of(context).size.height * 0.020,
                   ),
                   Column(
                     children: [
@@ -70,35 +74,38 @@ class _MyStatPageState extends State<MyStatPage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              myNewButtons(() {
-                                setState(() {
-                                  selectedItem = false;
-                                });
-                              },
-                                  'Ghana',
-                                  selectedItem
-                                      ? Color(0xff6C65AC)
-                                      : Color(0xffFFFFFF)),
-                              myNewButtons(() {
+                              Expanded(
+                                child: myNewButtons(() {
+                                  setState(() {
+                                    selectedItem = false;
+                                  });
+                                },
+                                    'Ghana',
+                                    selectedItem
+                                        ? Color(0xff6C65AC)
+                                        : Color(0xffFFFFFF)),
+                              ),
+                              Expanded(
+                                  child: myNewButtons(() {
                                 setState(() {
                                   selectedItem = true;
                                 });
                               },
-                                  'Global',
-                                  selectedItem
-                                      ? Color(0xffFFFFFF)
-                                      : Color(0xff6C65AC))
+                                      'Global',
+                                      selectedItem
+                                          ? Color(0xffFFFFFF)
+                                          : Color(0xff6C65AC)))
                             ],
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
+                      // SizedBox(
+                      //   height: 20,
+                      // ),
                       Container(
-                          child: Column(
+                          height: 250,
+                          child: ListView(
                         children: [
-                          // Text('Data'),
                           FutureBuilder<PostsList>(
                               future: data,
                               builder: (context,
@@ -121,6 +128,11 @@ class _MyStatPageState extends State<MyStatPage> {
                                                         .postsList[96].cases
                                                         .toString(),
                                                 color: Color(0xffFFB259)),
+                                            SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.05),
                                             myContainer(
                                                 text: 'Death',
                                                 dataText: selectedItem
@@ -134,7 +146,7 @@ class _MyStatPageState extends State<MyStatPage> {
                                           ],
                                         ),
                                         SizedBox(
-                                          height: 20,
+                                          height: MediaQuery.of(context).size.height *0.020,
                                         ),
                                         Column(
                                           children: [
@@ -144,6 +156,7 @@ class _MyStatPageState extends State<MyStatPage> {
                                                       .spaceBetween,
                                               children: [
                                                 myNewContainer(
+                                                  context: context,
                                                     text: 'Recovered',
                                                     dataText: selectedItem
                                                         ? newData.postsList[0]
@@ -153,8 +166,15 @@ class _MyStatPageState extends State<MyStatPage> {
                                                             .recovered
                                                             .toString(),
                                                     color: Color(0xff4CD97B)),
+                                                SizedBox(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.04),
                                                 // SizedBox(20),
                                                 myNewContainer(
+                                                  context: context,
                                                     text: 'Active',
                                                     dataText: selectedItem
                                                         ? newData
@@ -164,8 +184,15 @@ class _MyStatPageState extends State<MyStatPage> {
                                                             .active
                                                             .toString(),
                                                     color: Color(0xff4DB5FF)),
+                                                SizedBox(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.04),
 
                                                 myNewContainer(
+                                                  context: context,
                                                     text: 'Serious',
                                                     dataText: selectedItem
                                                         ? newData.postsList[0]
@@ -181,17 +208,17 @@ class _MyStatPageState extends State<MyStatPage> {
                                         )
                                       ],
                                     ),
+
                                   );
                                 }
                                 return Center(
                                   child: CircularProgressIndicator(),
                                 );
-                              })
+                              }),
+                          // SizedBox(height: 10,)
                         ],
                       )),
-                      SizedBox(
-                        height: 20,
-                      )
+
                     ],
                   )
                 ],
@@ -202,12 +229,14 @@ class _MyStatPageState extends State<MyStatPage> {
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            decoration: BoxDecoration(
-                color: Colors.grey.shade200,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40),
-                    topRight: Radius.circular(40))),
-            height: 220,
+            // decoration: BoxDecoration(
+            //     color: Colors.grey.shade200,
+            //     borderRadius: BorderRadius.only(
+            //         topLeft: Radius.circular(40),
+            //         topRight: Radius.circular(40))),
+            height: MediaQuery.of(context).size.height *0.25,
+            width: MediaQuery.of(context).size.width *40,
+            child: BarChartSample3(),
           ),
         )
       ],
